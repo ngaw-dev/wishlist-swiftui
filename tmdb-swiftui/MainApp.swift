@@ -4,7 +4,20 @@ import SwiftUI
 struct MainApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView() {
+                Tab("", systemImage: "house") {
+                    HomeView()
+                }
+                Tab("", systemImage: "heart") {
+                    FavouriteView()
+                }
+                Tab("", systemImage: "magnifyingglass") {
+                    SearchView()
+                }
+                Tab("", systemImage: "person.crop.circle") {
+                    ProfileView()
+                }
+            }
         }
     }
 }
