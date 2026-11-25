@@ -44,10 +44,28 @@ class MoviesListViewModel: ObservableObject {
                 print("ERR: error occured \(error.localizedDescription)")
             }
             
-            guard let data = data else {return}
-            guard let jsonObj = try? JSONSerialization.jsonObject(with: data) else { return }
+            guard let data = data else {
+                print("ERR: no data returned")
+                return
+            }
             
-            print("Recevied data \(jsonObj)")
+            do {
+                guard let jsonObj = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                      let results  = jsonObj["results"] as? [[String: Any]]
+                else {
+                    print("Bad JSON structure")
+                    return
+                }
+
+                if let first = results.first {
+                    print(first["title"] ?? "")
+                }
+                
+                print("Third movie: \(String(describing: results[2]["title"]))")
+            } catch {
+                print("Parse error:", error)
+            }
+
         }.resume()
     }
 }
