@@ -22,7 +22,7 @@ class MoviesListService {
         return request
     }
 
-    func fetchMoviesList(completion: @escaping((String) -> Void)) {
+    func fetchMoviesList(completion: @escaping(([Movie]) -> Void)) {
         URLSession.shared.dataTask(with: self.getRequest()) { data, response, error in
             if let error = error {
                 print("ERR: error occured \(error.localizedDescription)")
@@ -33,23 +33,14 @@ class MoviesListService {
                 return
             }
 
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
             do {
-                guard let jsonObj = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                      let results  = jsonObj["results"] as? [[String: Any]]
-                else {
-                    print("Bad JSON structure")
-                    return
-                }
+                let response = try decoder.decode(MoviesList.self, from: data)
+                let moviesList: [Movie] = response.results
 
-                if let firstMovie = results.first {
-                    print(firstMovie["title"] ?? "")
-                    if let title = firstMovie["title"] as? String {
-                        print("SRV: Title in service class: \(title)")
-                        completion(title)
-                    }
-                }
-
-                print("Third movie: \(String(describing: results[2]["title"]))")
+                print("\(moviesList)")
             } catch {
                 print("Parse error:", error)
             }
