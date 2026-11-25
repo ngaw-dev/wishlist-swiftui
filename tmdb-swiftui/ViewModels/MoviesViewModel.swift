@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-class MoviesListViewModel: ObservableObject {
+class MoviesViewModel: ObservableObject {
     @Published var moviesList = [Movie]()
     
     private let service = MoviesListService()

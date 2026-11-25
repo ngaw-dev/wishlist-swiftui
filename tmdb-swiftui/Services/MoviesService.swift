@@ -1,6 +1,6 @@
 import Foundation
 
-class MoviesListService {
+class MoviesService {
     func getRequest() -> URLRequest{
         let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day")!
 
