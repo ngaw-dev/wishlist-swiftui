@@ -11,6 +11,11 @@ struct HomeView: View {
                     .font(.caption2)
             }
         }
+        .overlay {
+            if let error = movies.errorMessage {
+                Text(error)
+            }
+        }
         Text("overview")
         Text("poster")
         Text("genreIds")
