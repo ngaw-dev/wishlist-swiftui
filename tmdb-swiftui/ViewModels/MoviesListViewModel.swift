@@ -57,15 +57,20 @@ class MoviesListViewModel: ObservableObject {
                     return
                 }
 
-                if let first = results.first {
-                    print(first["title"] ?? "")
+                if let firstMovie = results.first {
+                    print(firstMovie["title"] ?? "")
+                    if let title = firstMovie["title"] as? String {
+                        self.title = title
+                    }
+                    if let overview = firstMovie["overview"] as? String {
+                        self.overview = overview
+                    }
                 }
                 
                 print("Third movie: \(String(describing: results[2]["title"]))")
             } catch {
                 print("Parse error:", error)
             }
-
         }.resume()
     }
 }
