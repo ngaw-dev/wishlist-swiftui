@@ -9,6 +9,8 @@ class MoviesListViewModel: ObservableObject {
     //    @Published var genreIds: [Int] = []
     @Published var releaseDate = ""
 
+    private let service = MoviesListService()
+    
     init(
         title: String = "", overview: String = "", poster: String = "", /*genreIds: [Int], */
         releaseDate: String = ""
@@ -23,5 +25,9 @@ class MoviesListViewModel: ObservableObject {
     }
 
     func fetchMoviesList() {
+        service.fetchMoviesList { title in
+            self.title = title
+            print("VM: Title from service \(title)")
+        }
     }
 }
