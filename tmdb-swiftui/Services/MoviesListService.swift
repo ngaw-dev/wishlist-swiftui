@@ -40,7 +40,8 @@ class MoviesListService {
                 let response = try decoder.decode(MoviesList.self, from: data)
                 let moviesList: [Movie] = response.results
 
-                print("\(moviesList)")
+                print("SRV: movies list fetched")
+                completion(moviesList)
             } catch {
                 print("Parse error:", error)
             }
