@@ -2,9 +2,9 @@ import Combine
 import Foundation
 
 class MoviesViewModel: ObservableObject {
-    @Published var moviesList = [Movie]()
+    @Published var list = [Movie]()
     
-    private let service = MoviesListService()
+    private let service = MoviesService()
     
     init() {
         fetchMoviesList()
@@ -17,7 +17,7 @@ class MoviesViewModel: ObservableObject {
                 for movie in movies {
                     print("VM: \(movie.title)")
                 }
-                self.moviesList = movies
+                self.list = movies
             }
         }
     }

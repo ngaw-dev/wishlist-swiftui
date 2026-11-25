@@ -1,13 +1,16 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var movies = MoviesListViewModel()
+    @StateObject var movies = MoviesViewModel()
 
     var body: some View {
-        Text(movies.title)
-            .font(.title)
-        Text(movies.overview)
-            .font(.title3)
+        List {
+            ForEach(movies.list) { movie in
+                Text(movie.title)
+                Text(movie.overview)
+                    .font(.caption2)
+            }
+        }
         Text("overview")
         Text("poster")
         Text("genreIds")
