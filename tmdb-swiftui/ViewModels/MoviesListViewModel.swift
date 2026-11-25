@@ -25,10 +25,10 @@ class MoviesListViewModel: ObservableObject {
     }
 
     func fetchMoviesList() {
-        service.fetchMoviesList { title in
-            DispatchQueue.main.async {
-                self.title = title
-                print("VM: Title from service \(title)")
+        service.fetchMoviesList { movies in
+            print("VM: fetch movies completed")
+            for movie in movies {
+                print("VM: \(movie.title)")
             }
         }
     }
