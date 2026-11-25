@@ -31,3 +31,4 @@ fastlane/test_output
 
 # SwiftLint / Swifter
 SwifterSwiftConfig.json
+tmdb-swiftui.xcodeproj/Secrets.xcconfig
