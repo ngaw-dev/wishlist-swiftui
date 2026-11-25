@@ -35,6 +35,7 @@
 			children = (
 				5D4B2E6230B54DCC00F6E9F3 /* tmdb-swiftui */,
 				5D4B2E6130B54DCC00F6E9F3 /* Products */,
+				5DE7A05030B6E0FD008BFDDE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -44,6 +45,14 @@
 				5D4B2E6030B54DCC00F6E9F3 /* tmdb-swiftui.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5DE7A05030B6E0FD008BFDDE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B2E6E30B54DCE00F6E9F3 /* Secrets.xcconfig */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,7 +263,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
-				// YES merges generated keys (CFBundleIdentifier etc.) with Config/Info.plist
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -288,7 +296,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
-				// YES merges generated keys (CFBundleIdentifier etc.) with Config/Info.plist
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
