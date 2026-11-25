@@ -39,8 +39,15 @@ class MoviesListViewModel: ObservableObject {
                 "Bearer " + Config.tmdbAccessToken,
         ]
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            print("Recevied data \(data)")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("ERR: error occured \(error.localizedDescription)")
+            }
+            
+            guard let data = data else {return}
+            guard let jsonObj = try? JSONSerialization.jsonObject(with: data) else { return }
+            
+            print("Recevied data \(jsonObj)")
         }.resume()
     }
 }
