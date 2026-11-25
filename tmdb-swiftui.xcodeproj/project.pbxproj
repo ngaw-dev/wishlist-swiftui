@@ -8,7 +8,7 @@
 
 /* Begin PBXFileReference section */
 		5D4B2E6030B54DCC00F6E9F3 /* tmdb-swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tmdb-swiftui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D4B2E6E30B54DCE00F6E9F3 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		5D4B2E6E30B54DCE00F6E9F3 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "tmdb-swiftui.xcodeproj/Secrets.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -254,8 +254,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				// YES merges generated keys (CFBundleIdentifier etc.) with Config/Info.plist
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_TMDB_ACCESS_TOKEN = "$(TMDB_ACCESS_TOKEN)";
+				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -287,8 +288,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				// YES merges generated keys (CFBundleIdentifier etc.) with Config/Info.plist
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_TMDB_ACCESS_TOKEN = "$(TMDB_ACCESS_TOKEN)";
+				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

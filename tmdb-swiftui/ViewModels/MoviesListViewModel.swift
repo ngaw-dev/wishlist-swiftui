@@ -36,7 +36,7 @@ class MoviesListViewModel: ObservableObject {
         request.allHTTPHeaderFields = [
             "accept": "application/json",
             "Authorization":
-                "Bearer ",
+                "Bearer " + Config.tmdbAccessToken,
         ]
 
         URLSession.shared.dataTask(with: url) { data, response, error in
