@@ -5,8 +5,14 @@ protocol MovieServiceProtocol {
 }
 
 struct MovieService: MovieServiceProtocol {
+    private var client: ApiClient
+    
+    init() {
+        client = ApiClient()
+    }
+    
     func fetchMovies() async throws -> [Movie] {
-        try await ApiRequest.execute(apiUrl: "/trending/movie/day", as: MoviesList.self).results
+        try await client.execute(apiUrl: "/trending/movie/day", as: MoviesList.self).results
     }
 }
 

@@ -1,6 +1,9 @@
 import Foundation
 
-enum ApiRequest {
+struct ApiClient {
+    var session: URLSession = .shared
+    var decoder: JSONDecoder = JSONDecoder()
+
     static func getRequest(apiUrl: String) -> URLRequest {
         let url = URL(string: "https://api.themoviedb.org/3/\(apiUrl)")!
 
@@ -21,9 +24,9 @@ enum ApiRequest {
         return request
     }
 
-    static func execute<Response: Decodable>(apiUrl: String, as _: Response.Type) async throws -> Response {
-        let request = getRequest(apiUrl: apiUrl)
-        let (data, response) = try await URLSession.shared.data(for: request)
+    func execute<Response: Decodable>(apiUrl: String, as _: Response.Type) async throws -> Response {
+        let request = Self.getRequest(apiUrl: apiUrl)
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw ApiError.requestFailed(description: "Request failed")
@@ -33,7 +36,6 @@ enum ApiRequest {
             throw ApiError.invalidaStatusCode(code: httpResponse.statusCode)
         }
 
-        let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         do {

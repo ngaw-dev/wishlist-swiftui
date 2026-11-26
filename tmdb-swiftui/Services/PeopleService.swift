@@ -5,8 +5,14 @@ protocol PeopleServiceProtocol {
 }
 
 struct PeopleService: PeopleServiceProtocol {
+    private var client: ApiClient
+    
+    init() {
+        client = ApiClient()
+    }
+    
     func fetchPeople() async throws -> [People] {
-        try await ApiRequest.execute(apiUrl: "/trending/person/day", as: PeopleList.self).results
+        try await client.execute(apiUrl: "/trending/person/day", as: PeopleList.self).results
     }
 }
 
