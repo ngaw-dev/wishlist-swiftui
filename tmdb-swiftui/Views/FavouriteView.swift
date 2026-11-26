@@ -9,7 +9,7 @@ struct FavouriteView: View {
             Text("Favourites")
                 .font(.largeTitle.bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Button("", systemImage: "arrow.up", action: { print("test")})
+            Button("", systemImage: "arrow.up", action: { print("test") })
         }
         Text("Content")
             .frame(maxWidth: .infinity, maxHeight: .infinity)

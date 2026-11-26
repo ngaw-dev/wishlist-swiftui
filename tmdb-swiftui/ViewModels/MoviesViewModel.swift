@@ -12,7 +12,7 @@ final class MoviesViewModel {
 
     func loadMovies() async {
         do {
-            self.list = try await service.fetchMovies()
+            list = try await service.fetchMovies()
         } catch {
             print("ERR: unable to load movies \(error): VM")
         }

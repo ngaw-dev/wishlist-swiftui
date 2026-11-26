@@ -6,7 +6,7 @@ enum ApiError: Error {
     case requestFailed(description: String)
     case invalidaStatusCode(code: Int)
     case unknownError(error: Error)
-    
+
     var customDescription: String {
         switch self {
         case .invalidData: return "ERR: Invalid data"

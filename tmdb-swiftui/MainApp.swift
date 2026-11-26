@@ -4,7 +4,7 @@ import SwiftUI
 struct MainApp: App {
     var body: some Scene {
         WindowGroup {
-            TabView() {
+            TabView {
                 Tab("", systemImage: "house") {
                     HomeView()
                 }

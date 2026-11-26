@@ -1,12 +1,12 @@
 import Foundation
 
-struct ApiRequest {
+enum ApiRequest {
     static func getRequest(apiUrl: String) -> URLRequest {
         let url = URL(string: "https://api.themoviedb.org/3/\(apiUrl)")!
 
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         let queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "language", value: "en-US")
+            URLQueryItem(name: "language", value: "en-US"),
         ]
         components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
 
@@ -21,7 +21,7 @@ struct ApiRequest {
         return request
     }
 
-    static func execute<Response: Decodable>(apiUrl: String, as type: Response.Type) async throws -> Response {
+    static func execute<Response: Decodable>(apiUrl: String, as _: Response.Type) async throws -> Response {
         let request = getRequest(apiUrl: apiUrl)
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -29,7 +29,7 @@ struct ApiRequest {
             throw ApiError.requestFailed(description: "Request failed")
         }
 
-        guard (200...299).contains(httpResponse.statusCode) else {
+        guard (200 ... 299).contains(httpResponse.statusCode) else {
             throw ApiError.invalidaStatusCode(code: httpResponse.statusCode)
         }
 

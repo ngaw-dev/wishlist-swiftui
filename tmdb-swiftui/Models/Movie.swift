@@ -11,6 +11,7 @@ struct Movie: Codable, Identifiable {
 struct MoviesList: Codable {
     let results: [Movie]
 }
+
 extension Movie {
     static let mockMovies: [Movie] = [
         Movie(
@@ -36,4 +37,3 @@ extension Movie {
         ),
     ]
 }
-
