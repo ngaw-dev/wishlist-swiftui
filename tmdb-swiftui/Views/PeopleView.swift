@@ -17,6 +17,9 @@ struct PeopleView: View {
                 Text(person.knownForDepartment)
             }
         }
+        .task {
+            await peopleViewModel.loadPeoples()
+        }
     }
 }
 
