@@ -6,15 +6,18 @@ struct PeopleView: View {
     var body: some View {
         List {
             ForEach(peopleViewModel.list) { person in
-                Text(person.name)
-                if person.gender == 1 {
-                    Text("Female")
-                } else if person.gender == 2 {
-                    Text("Male")
-                } else {
-                    Text("Unkown")
+                VStack(alignment: .leading) {
+                    Text(person.name)
+                    if person.gender == 1 {
+                        Text("Female")
+                    } else if person.gender == 2 {
+                        Text("Male")
+                    } else {
+                        Text("Unkown")
+                    }
+                    Text(person.knownForDepartment)
+
                 }
-                Text(person.knownForDepartment)
             }
         }
         .task {
