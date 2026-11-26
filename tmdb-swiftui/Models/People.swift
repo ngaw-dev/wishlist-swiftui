@@ -5,7 +5,7 @@ import Foundation
 struct People: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
-    let profilePath: String
+    let profilePath: String?
     let gender: Int
     let knownForDepartment: String
 }

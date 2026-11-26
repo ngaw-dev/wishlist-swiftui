@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PeopleView: View {
-    @State private var peopleViewModel = PeopleViewModel()
+    @State private var peopleViewModel = PeopleViewModel(service: PeopleService())
     
     var body: some View {
         List {
