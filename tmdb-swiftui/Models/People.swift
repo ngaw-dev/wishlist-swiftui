@@ -11,7 +11,7 @@ struct People: Codable, Identifiable, Hashable {
 }
 
 struct PeopleList: Codable {
-    let list: [People]
+    let results: [People]
 }
 
 extension People {

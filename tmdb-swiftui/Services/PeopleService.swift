@@ -22,7 +22,6 @@ struct PeopleService: PeopleServiceProtocol {
 
         do {
             return try decoder.decode(PeopleList.self, from: data).results
-            return []
         } catch {
             print("Parse error:", error)
             throw ApiError.jsonParserError
