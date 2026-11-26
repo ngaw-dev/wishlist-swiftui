@@ -8,10 +8,16 @@ class MoviesViewModel: ObservableObject {
     private let service = MoviesService()
     
     init() {
-        fetchMoviesList()
+        Task {
+            try await fetcMoviesList()
+        }
     }
     
-    func fetchMoviesList() {
+    func fetcMoviesList() async throws {
+        try await service.fetchMoviesList()
+    }
+    
+    func fetchMoviesListViewModel() {
         service.fetchMoviesList { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

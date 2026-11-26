@@ -1,10 +1,10 @@
 import Foundation
 
 class MoviesService {
-    func getRequest() -> URLRequest{
-        let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day")!
+    private var url = URL(string: "https://api.themoviedb.org/3/trending/movie/day")!
 
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+    func getRequest() -> URLRequest{
+        var components = URLComponents(url: self.url, resolvingAgainstBaseURL: true)!
         let queryItems: [URLQueryItem] = [
             URLQueryItem(name: "language", value: "en-US")
         ]
@@ -21,7 +21,19 @@ class MoviesService {
 
         return request
     }
+    
+    func fetchMoviesList() async throws {
+        do {
+            let (data, response) = try await URLSession.shared.data(from: self.url)
+            print("\(data) \(response)")
+        } catch {
+            print("Parse error:", error)
+//            completion(.failure(.jsonParserError))
+        }
+    }
+}
 
+extension MoviesService {
     func fetchMoviesList(completion: @escaping (Result<[Movie], ApiError>) -> Void) {
         URLSession.shared.dataTask(with: self.getRequest()) { data, response, error in
             if let error = error {
