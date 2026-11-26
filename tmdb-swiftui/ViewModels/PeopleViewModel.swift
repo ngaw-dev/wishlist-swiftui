@@ -18,19 +18,3 @@ final class PeopleViewModel {
         }
     }
 }
-
-protocol PeopleServiceProtocol {
-    func fetchPeople() async throws -> [People]
-}
-
-struct PeopleService: PeopleServiceProtocol {
-    func fetchPeople() async throws -> [People] {
-        return []
-    }
-}
-
-struct MockPeopleService: PeopleServiceProtocol {
-    func fetchPeople() async throws -> [People] {
-        return People.mockPeople
-    }
-}

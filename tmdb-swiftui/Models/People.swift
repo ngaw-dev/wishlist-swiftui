@@ -10,6 +10,10 @@ struct People: Codable, Identifiable, Hashable {
     let knownForDepartment: String
 }
 
+struct PeopleList: Codable {
+    let list: [People]
+}
+
 extension People {
     static let mockPeople: [People] = [
         People(
