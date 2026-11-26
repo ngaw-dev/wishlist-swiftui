@@ -3,7 +3,7 @@ import Foundation
 class MoviesService {
     private var url = URL(string: "https://api.themoviedb.org/3/trending/movie/day")!
 
-    func getRequest() -> URLRequest{
+    func getRequest() -> URLRequest {
         var components = URLComponents(url: self.url, resolvingAgainstBaseURL: true)!
         let queryItems: [URLQueryItem] = [
             URLQueryItem(name: "language", value: "en-US")
@@ -15,20 +15,31 @@ class MoviesService {
         request.timeoutInterval = 10
         request.allHTTPHeaderFields = [
             "accept": "application/json",
-            "Authorization":
-                "Bearer " + Config.tmdbAccessToken,
+            "Authorization": "Bearer " + Config.tmdbAccessToken,
         ]
 
         return request
     }
-    
-    func fetchMoviesList() async throws {
+
+    func fetchMoviesList() async throws -> [Movie] {
+        let (data, response) = try await URLSession.shared.data(for: self.getRequest())
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw ApiError.requestFailed(description: "Request failed")
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw ApiError.invalidaStatusCode(code: httpResponse.statusCode)
+        }
+
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
         do {
-            let (data, response) = try await URLSession.shared.data(from: self.url)
-            print("\(data) \(response)")
+            return try decoder.decode(MoviesList.self, from: data).results
         } catch {
             print("Parse error:", error)
-//            completion(.failure(.jsonParserError))
+            throw ApiError.jsonParserError
         }
     }
 }

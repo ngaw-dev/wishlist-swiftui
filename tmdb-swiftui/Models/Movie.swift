@@ -4,8 +4,7 @@ struct Movie: Codable, Identifiable {
     let id: Int
     let title: String
     let overview: String
-    let poster: String?
-    //    let genreIds: [Int]
+    let posterPath: String?
     let releaseDate: String
 }
 
