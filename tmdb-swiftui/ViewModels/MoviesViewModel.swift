@@ -1,46 +1,19 @@
 import Combine
-import Foundation
 
-@MainActor
-class MoviesViewModel: ObservableObject {
-    @Published var list = [Movie]()
-    @Published var errorMessage: String?
+final class MoviesViewModel {
+    var list: [Movie] = []
 
-    private let service = MoviesService()
+    private let service: MovieServiceProtocol
 
-    init() {
-        Task {
-            await loadMovies()
-        }
+    init(service: MovieServiceProtocol) {
+        self.service = service
     }
 
     func loadMovies() async {
         do {
-            self.list = try await fetchMoviesList()
+            self.list = try await service.fetchMovies()
         } catch {
-            self.errorMessage = (error as? ApiError)?.customDescription ?? error.localizedDescription
-        }
-    }
-
-    func fetchMoviesList() async throws -> [Movie] {
-        try await service.fetchMoviesList()
-    }
-
-    func fetchMoviesListViewModel() {
-        service.fetchMoviesList { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let movies):
-                    print("VM: fetch movies completed")
-                    for movie in movies {
-                        print("VM: \(movie.title)")
-                    }
-                    self?.list = movies
-                case .failure(let error):
-                    self?.errorMessage = error.customDescription
-                    print("VM: fetch movies failed:", error.customDescription)
-                }
-            }
+            print("ERR: unable to load movies \(error): VM")
         }
     }
 }

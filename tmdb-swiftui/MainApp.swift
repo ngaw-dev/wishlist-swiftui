@@ -6,8 +6,7 @@ struct MainApp: App {
         WindowGroup {
             TabView() {
                 Tab("", systemImage: "house") {
-//                    HomeView()
-                    PeopleView()
+                    HomeView()
                 }
                 Tab("", systemImage: "person.3.sequence") {
                     PeopleView()
