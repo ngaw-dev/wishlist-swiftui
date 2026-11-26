@@ -9,7 +9,7 @@ class MoviesViewModel: ObservableObject {
     
     init() {
         Task {
-            try await fetcMoviesList()
+            self.list = try await fetcMoviesList()
         }
     }
     
