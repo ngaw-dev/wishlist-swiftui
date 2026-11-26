@@ -3,12 +3,6 @@ import SwiftUI
 struct HomeView: View {
     @State private var moviesViewModel = MoviesViewModel(service: MovieService())
 
-    init() {
-         Task {
-             await sevice.loadMovies()
-         }
-     }
-
     var body: some View {
         List {
             ForEach(moviesViewModel.list) { movie in
@@ -16,6 +10,9 @@ struct HomeView: View {
                 Text(movie.overview)
                     .font(.caption2)
             }
+        }
+        .task {
+            await moviesViewModel.loadMovies()
         }
 //        .overlay {
 //            if let error = movies.errorMessage {

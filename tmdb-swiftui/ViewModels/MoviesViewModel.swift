@@ -1,5 +1,6 @@
-import Combine
+import Foundation
 
+@Observable
 final class MoviesViewModel {
     var list: [Movie] = []
 
