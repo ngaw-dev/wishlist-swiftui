@@ -8,6 +8,9 @@ struct MainApp: App {
                 Tab("", systemImage: "house") {
                     HomeView()
                 }
+                Tab("", systemImage: "person.3.sequence") {
+                    PeopleView()
+                }
                 Tab("", systemImage: "heart") {
                     FavouriteView()
                 }
