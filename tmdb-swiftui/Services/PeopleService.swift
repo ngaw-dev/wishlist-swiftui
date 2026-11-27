@@ -12,7 +12,7 @@ struct PeopleService: PeopleServiceProtocol {
     }
     
     func fetchPeople() async throws -> [People] {
-        try await client.execute(apiUrl: "/trending/person/day", as: PeopleList.self).results
+        try await client.execute(apiUrl: "/trending/person/day", as: PeopleListResult.self).results
     }
 }
 

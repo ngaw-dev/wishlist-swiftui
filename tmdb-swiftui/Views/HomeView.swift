@@ -10,24 +10,15 @@ struct HomeView: View {
                 ProgressView()
             case .empty:
                 Text("Nothing to show")
-            case .error(let errorMsg):
-                Text(errorMsg)
+            case .error(let error):
+                ErrorView(error: error, retry: moviesViewModel.loadMovies)
             case .loaded(let list):
-                Text("Loaded")
+                MoviesListView(movies: list)
             }
         }
         .task {
             await moviesViewModel.loadMovies()
         }
-//        .overlay {
-//            if let error = movies.errorMessage {
-//                Text(error)
-//            }
-//        }
-        Text("overview")
-        Text("poster")
-        Text("genreIds")
-        Text("releaseDate")
     }
 }
 

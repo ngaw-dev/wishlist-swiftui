@@ -4,11 +4,11 @@ struct Movie: Codable, Identifiable {
     let id: Int
     let title: String
     let overview: String
-    let posterPath: String?
+    let posterPath: String
     let releaseDate: String
 }
 
-struct MoviesList: Codable {
+struct MoviesListResult: Codable {
     let results: [Movie]
 }
 

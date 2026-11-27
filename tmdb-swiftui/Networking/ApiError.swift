@@ -1,6 +1,6 @@
 import Foundation
 
-enum ApiError: Error {
+enum ApiError: LocalizedError {
     case invalidData
     case jsonParserError
     case decodingError(error: Error)
@@ -38,6 +38,41 @@ enum ApiError: Error {
             return "\(Self.userMsg(forStatusCode: code)) Error code #\(code)"
         }
         return "\(baseUserMsg) Error code #\(errorCode)"
+    }
+
+    // Views can render any Error via localizedDescription; route it back to
+    // our user-facing message when the error is (or wraps) an ApiError.
+    var errorDescription: String? {
+        userMsg
+    }
+
+    static func userMessage(for error: Error) -> String {
+        if let apiError = error as? ApiError {
+            return apiError.userMsg
+        }
+        return error.localizedDescription
+    }
+
+    // Views often render the message one sentence per line (title + retry hint),
+    // so split the user-facing message into sentences, keeping punctuation.
+    var userMsgSentences: [String] {
+        var sentences: [String] = []
+        var current = ""
+
+        for char in userMsg {
+            current.append(char)
+            // "!" ends sentences like "Easy there, speed racer!" but also
+            // appears inside "sideways." — only split when followed by a space.
+            if (char == "." || char == "!" || char == "?") {
+                sentences.append(current.trimmingCharacters(in: .whitespaces))
+                current = ""
+            }
+        }
+
+        if !current.isEmpty {
+            sentences.append(current.trimmingCharacters(in: .whitespaces))
+        }
+        return sentences
     }
 
     private var baseUserMsg: String {

@@ -17,8 +17,9 @@ final class MoviesViewModel {
             let list = try await service.fetchMovies()
             loadingState = list.isEmpty ? .empty : .loaded(list)
         } catch {
-            loadingState = .error(error.localizedDescription)
-            print("ERR: unable to load movies \(error): VM")
+            let apiError = (error as? ApiError) ?? .unknownError(error: error)
+            loadingState = .error(apiError)
+            print("ERR: unable to load movies \(apiError.serverMsg): VM")
         }
     }
 }

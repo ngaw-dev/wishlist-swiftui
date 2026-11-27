@@ -12,7 +12,7 @@ struct MovieService: MovieServiceProtocol {
     }
     
     func fetchMovies() async throws -> [Movie] {
-        try await client.execute(apiUrl: "/trending/movie/day", as: MoviesList.self).results
+        try await client.execute(apiUrl: "/trending/movie/day", as: MoviesListResult.self).results
     }
 }
 

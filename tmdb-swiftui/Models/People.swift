@@ -10,7 +10,7 @@ struct People: Codable, Identifiable, Hashable {
     let knownForDepartment: String
 }
 
-struct PeopleList: Codable {
+struct PeopleListResult: Codable {
     let results: [People]
 }
 
