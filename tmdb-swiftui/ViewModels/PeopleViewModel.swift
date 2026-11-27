@@ -3,7 +3,7 @@ import Foundation
 @Observable
 final class PeopleViewModel {
     var loadingState: LoadingState<[People]> = .idle
-    
+
     private let service: PeopleServiceProtocol
 
     init(service: PeopleServiceProtocol) {
@@ -12,7 +12,7 @@ final class PeopleViewModel {
 
     func loadPeoples() async {
         loadingState = .loading
-        
+
         do {
             let list = try await service.fetchPeople()
             loadingState = list.isEmpty ? .empty : .loaded(list)

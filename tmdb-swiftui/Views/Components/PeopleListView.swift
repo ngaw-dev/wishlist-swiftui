@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PeopleListView: View {
     let list: [People]
-    
+
     var body: some View {
         List(list) { person in
             VStack(alignment: .leading) {

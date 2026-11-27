@@ -10,9 +10,9 @@ struct HomeView: View {
                 ProgressView()
             case .empty:
                 Text("Nothing to show")
-            case .error(let error):
+            case let .error(error):
                 ErrorView(error: error, retry: moviesViewModel.loadMovies)
-            case .loaded(let list):
+            case let .loaded(list):
                 MoviesListView(movies: list)
             }
         }

@@ -1,8 +1,8 @@
 // tmdb-swiftui/Views/Components/ErrorView.swift
 import SwiftUI
 
-// Shared error display: first sentence as the headline, the rest as a
-// supporting line, plus a retry button when an action is provided.
+/// Shared error display: first sentence as the headline, the rest as a
+/// supporting line, plus a retry button when an action is provided.
 struct ErrorView: View {
     let error: ApiError
     var retry: (() async -> Void)?
@@ -33,4 +33,3 @@ struct ErrorView: View {
 #Preview {
     ErrorView(error: .requestFailed(description: "Request timed out"))
 }
-

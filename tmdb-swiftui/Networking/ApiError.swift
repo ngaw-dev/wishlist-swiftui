@@ -14,8 +14,8 @@ enum ApiError: LocalizedError {
     case serverError(code: Int)
     case unknownError(error: Error)
 
-    // Every user-facing message ends with a stable reference number so
-    // support can correlate user reports with server logs.
+    /// Every user-facing message ends with a stable reference number so
+    /// support can correlate user reports with server logs.
     var errorCode: Int {
         switch self {
         case .invalidData: return 4815
@@ -40,8 +40,8 @@ enum ApiError: LocalizedError {
         return "\(baseUserMsg) Error code #\(errorCode)"
     }
 
-    // Views can render any Error via localizedDescription; route it back to
-    // our user-facing message when the error is (or wraps) an ApiError.
+    /// Views can render any Error via localizedDescription; route it back to
+    /// our user-facing message when the error is (or wraps) an ApiError.
     var errorDescription: String? {
         userMsg
     }
@@ -53,8 +53,8 @@ enum ApiError: LocalizedError {
         return error.localizedDescription
     }
 
-    // Views often render the message one sentence per line (title + retry hint),
-    // so split the user-facing message into sentences, keeping punctuation.
+    /// Views often render the message one sentence per line (title + retry hint),
+    /// so split the user-facing message into sentences, keeping punctuation.
     var userMsgSentences: [String] {
         var sentences: [String] = []
         var current = ""
@@ -63,7 +63,7 @@ enum ApiError: LocalizedError {
             current.append(char)
             // "!" ends sentences like "Easy there, speed racer!" but also
             // appears inside "sideways." — only split when followed by a space.
-            if (char == "." || char == "!" || char == "?") {
+            if char == "." || char == "!" || char == "?" {
                 sentences.append(current.trimmingCharacters(in: .whitespaces))
                 current = ""
             }
@@ -104,7 +104,7 @@ enum ApiError: LocalizedError {
         case 500: return "The server tripped over itself. Please try again."
         case 502, 504: return "The server went quiet mid-conversation. Please try again."
         case 503: return "The server is catching its breath. Please try again shortly."
-        case 500...599: return serverError(code: code).baseUserMsg
+        case 500 ... 599: return serverError(code: code).baseUserMsg
         default: return "Oops, something went wrong. Please try again."
         }
     }

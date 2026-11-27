@@ -10,9 +10,9 @@ struct PeopleView: View {
                 ProgressView()
             case .empty:
                 Text("No people found")
-            case .error(let apiError):
+            case let .error(apiError):
                 ErrorView(error: apiError)
-            case .loaded(let list):
+            case let .loaded(list):
                 PeopleListView(list: list)
             }
         }

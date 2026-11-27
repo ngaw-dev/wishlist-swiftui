@@ -6,11 +6,11 @@ protocol MovieServiceProtocol {
 
 struct MovieService: MovieServiceProtocol {
     private var client: ApiClient
-    
+
     init() {
         client = ApiClient()
     }
-    
+
     func fetchMovies() async throws -> [Movie] {
         try await client.execute(apiUrl: "/trending/movie/day", as: MoviesListResult.self).results
     }
