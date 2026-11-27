@@ -2,7 +2,7 @@ import Foundation
 
 @Observable
 final class MoviesViewModel {
-    var list: [Movie] = []
+    var loadingState: LoadingState<[Movie]> = .idle
 
     private let service: MovieServiceProtocol
 
@@ -11,9 +11,13 @@ final class MoviesViewModel {
     }
 
     func loadMovies() async {
+        loadingState = .loading
+
         do {
-            list = try await service.fetchMovies()
+            let list = try await service.fetchMovies()
+            loadingState = list.isEmpty ? .empty : .loaded(list)
         } catch {
+            loadingState = .error(error.localizedDescription)
             print("ERR: unable to load movies \(error): VM")
         }
     }
